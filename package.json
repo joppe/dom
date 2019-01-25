@@ -1,6 +1,6 @@
 {
     "name": "@apestaartje/dom",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "description": "A library with DOM utility functions",
     "scripts": {
         "build": "npm run clean && node ./node_modules/.bin/tsc",
