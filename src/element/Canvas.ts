@@ -5,28 +5,36 @@ import * as geometry from '@apestaartje/geometry';
  */
 
 export class Canvas {
-    private _size: geometry.size.Size;
+    private readonly _el: HTMLCanvasElement;
 
-    private _el: HTMLCanvasElement;
+    /**
+     * Getters
+     */
+
+    get classList(): DOMTokenList {
+        return this._el.classList;
+    }
 
     get context(): CanvasRenderingContext2D {
         return this._el.getContext('2d');
     }
 
-    get width(): number {
-        return this._size.width;
+    get size(): geometry.size.Size {
+        return {
+            width: this.getDimension('width'),
+            height: this.getDimension('height')
+        };
     }
 
-    get height(): number {
-        return this._size.height;
+    set size(size: geometry.size.Size) {
+        this._el.setAttribute('width', `${size.width}px`);
+        this._el.setAttribute('height', `${size.height}px`);
     }
 
     constructor(size: geometry.size.Size) {
-        this._size = size;
-
         this._el = document.createElement('canvas');
-        this._el.setAttribute('width', String(this._size.width));
-        this._el.setAttribute('height', String(this._size.height));
+
+        this.size = size;
     }
 
     /**
@@ -41,9 +49,13 @@ export class Canvas {
     /**
      * Clear the canvas
      */
-    public clear(area: geometry.square.Square = {topLeft: {x: 0, y: 0}, bottomRight: {x: this.width, y: this.height}}): Canvas {
+    public clear(area: geometry.square.Square = {topLeft: {x: 0, y: 0}, bottomRight: {x: this.size.width, y: this.size.height}}): Canvas {
         this.context.clearRect(area.topLeft.x, area.topLeft.y, geometry.square.width(area), geometry.square.height(area));
 
         return this;
+    }
+
+    private getDimension(dimension: 'width' | 'height'): number {
+        return parseInt(this._el.getAttribute(dimension), 10);
     }
 }
