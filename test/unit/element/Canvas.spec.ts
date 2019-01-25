@@ -32,6 +32,12 @@ describe('Canvas', (): void => {
         });
     });
 
+    describe('get style', (): void => {
+        it('return the style object of the element', (): void => {
+            expect(Object.prototype.toString.call(canvas.style)).toEqual('[object CSSStyleDeclaration]');
+        });
+    });
+
     describe('set size', (): void => {
         it('adjust the dimensions of the canvas element', (): void => {
             canvas.appendTo(root);
