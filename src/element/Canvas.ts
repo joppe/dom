@@ -31,6 +31,10 @@ export class Canvas {
         this._el.setAttribute('height', `${size.height}px`);
     }
 
+    get style(): CSSStyleDeclaration {
+        return this._el.style;
+    }
+
     constructor(size: geometry.size.Size) {
         this._el = document.createElement('canvas');
 

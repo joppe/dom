@@ -1,4 +1,4 @@
-import {Canvas} from '../../../src/element/Canvas';
+import { Canvas } from '../../../src/element/Canvas';
 
 // tslint:disable mocha-no-side-effect-code
 
@@ -29,6 +29,12 @@ describe('Canvas', (): void => {
     describe('get size', (): void => {
         it('return the classList object of the element', (): void => {
             expect(Object.prototype.toString.call(canvas.classList)).toEqual('[object DOMTokenList]');
+        });
+    });
+
+    describe('get style', (): void => {
+        it('return the style object of the element', (): void => {
+            expect(Object.prototype.toString.call(canvas.style)).toEqual('[object CSSStyleDeclaration]');
         });
     });
 
