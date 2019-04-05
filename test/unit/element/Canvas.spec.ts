@@ -53,10 +53,12 @@ describe('Canvas', (): void => {
 
     describe('appendTo', (): void => {
         it('add the canvas element as a child element of the given element', (): void => {
+            // tslint:disable-next-line no-null-keyword
             expect(root.querySelector('canvas')).toEqual(null);
 
             canvas.appendTo(root);
 
+            // tslint:disable-next-line no-null-keyword
             expect(root.querySelector('canvas')).not.toEqual(null);
         });
     });
