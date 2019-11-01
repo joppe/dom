@@ -54,10 +54,14 @@ module.exports = function (config) {
             },
             compilerOptions: {
                 module: 'commonjs',
+                paths: {
+                    "@apestaartje/dom/*": [
+                        "./src/*"
+                    ]
+                },
                 sourceMap: true
             },
             tsconfig: './tsconfig.json'
-
         },
 
         port: 9876,

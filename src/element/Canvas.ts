@@ -16,13 +16,13 @@ export class Canvas {
     }
 
     get context(): CanvasRenderingContext2D {
-        return this._el.getContext('2d');
+        return <CanvasRenderingContext2D>this._el.getContext('2d');
     }
 
     get size(): geometry.size.Size {
         return {
             width: this.getDimension('width'),
-            height: this.getDimension('height')
+            height: this.getDimension('height'),
         };
     }
 
@@ -60,6 +60,12 @@ export class Canvas {
     }
 
     private getDimension(dimension: 'width' | 'height'): number {
-        return parseInt(this._el.getAttribute(dimension), 10);
+        const value: string | null = this._el.getAttribute(dimension);
+
+        if (value === null) {
+            return 0;
+        }
+
+        return parseInt(value, 10);
     }
 }

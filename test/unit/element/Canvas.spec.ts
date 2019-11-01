@@ -1,4 +1,4 @@
-import { Canvas } from '../../../src/element/Canvas';
+import { Canvas } from '@apestaartje/dom/element/Canvas';
 
 // tslint:disable mocha-no-side-effect-code
 
@@ -43,11 +43,11 @@ describe('Canvas', (): void => {
             canvas.appendTo(root);
             canvas.size = { width: 100, height: 500 };
 
-            const el: HTMLCanvasElement = root.querySelector('canvas');
+            const el: HTMLCanvasElement | null = root.querySelector('canvas');
 
             expect(canvas.size).toEqual({ width: 100, height: 500 });
-            expect(el.getAttribute('width')).toEqual('100px');
-            expect(el.getAttribute('height')).toEqual('500px');
+            expect(el!.getAttribute('width')).toEqual('100px');
+            expect(el!.getAttribute('height')).toEqual('500px');
         });
     });
 

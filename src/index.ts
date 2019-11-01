@@ -1,11 +1,7 @@
-import * as element from './element/index';
-
-// tslint:disable export-name
-
-/**
- * This file exports all functions from this lib
- */
+import * as customElement from './custom-element';
+import * as element from './element';
 
 export {
-    element
+    customElement,
+    element,
 };
