@@ -17,6 +17,7 @@ export function Output<T>(eventName: string): PropertyDecorator {
                             const init: CustomEventInit<T> = {
                                 detail: value,
                                 bubbles: true,
+                                composed: true,
                             };
 
                             self.dispatchEvent(new CustomEvent(eventName, init));
