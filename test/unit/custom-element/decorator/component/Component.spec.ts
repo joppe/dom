@@ -10,6 +10,7 @@ import { Component } from '@apestaartje/dom/custom-element/decorator/component/C
             color: rgb(255, 0, 0);
         }
     `,
+    useShadowRoot: true,
 })
 class Test extends HTMLElement {}
 

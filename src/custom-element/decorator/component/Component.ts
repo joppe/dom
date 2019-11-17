@@ -1,10 +1,11 @@
 import * as types from '@apestaartje/types';
 
 import { ComponentOptions } from './ComponentOptions';
+import { HTMLCustomElement } from '../../HTMLCustomElement';
 import { isValidSelector } from './isValidSelector';
 
 // tslint:disable-next-line function-name no-any
-export function Component<T extends types.Constructor<HTMLElement>>(options: ComponentOptions): (target: T) => any {
+export function Component<T extends types.Constructor<HTMLCustomElement>>(options: ComponentOptions): (target: T) => any {
     if (!isValidSelector(options.selector)) {
         throw new Error(`Invalid CustomElement selector "${options.selector}", always use a "-" in the name of the tag.`);
     }
@@ -25,8 +26,22 @@ export function Component<T extends types.Constructor<HTMLElement>>(options: Com
             constructor(...args: any[]) {
                 super(...args);
 
-                const shadowRoot: ShadowRoot = this.attachShadow({ mode: 'open' });
-                shadowRoot.appendChild(template.content.cloneNode(true));
+                if (options.useShadowRoot) {
+                    this.attachShadow({ mode: 'open' });
+                }
+            }
+
+            public connectedCallback(): void {
+                if (super.connectedCallback) {
+                    super.connectedCallback();
+                }
+
+                if (options.useShadowRoot) {
+                    (<ShadowRoot>this.shadowRoot).appendChild(template.content.cloneNode(true));
+                } else {
+                    // console.log(this.appendChild);
+                    this.appendChild(template.content.cloneNode(true));
+                }
             }
         };
 

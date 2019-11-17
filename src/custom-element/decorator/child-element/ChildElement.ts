@@ -11,7 +11,11 @@ export function ChildElement(selector: string): PropertyDecorator {
                     // tslint:disable-next-line no-this-assignment no-invalid-this
                     const self: HTMLElement = <HTMLElement>this;
 
-                    return (<ShadowRoot>self.shadowRoot).querySelector(selector);
+                    if (self.shadowRoot) {
+                        return self.shadowRoot.querySelector(selector);
+                    }
+
+                    return self.querySelector(selector);
                 },
                 set: (): void => {
                     throw new Error('Do not try to set the value of a decorated "@ChildElement" property');
