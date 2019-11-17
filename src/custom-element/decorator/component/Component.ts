@@ -32,15 +32,15 @@ export function Component<T extends types.Constructor<HTMLCustomElement>>(option
             }
 
             public connectedCallback(): void {
-                if (super.connectedCallback) {
-                    super.connectedCallback();
-                }
-
                 if (options.useShadowRoot) {
                     (<ShadowRoot>this.shadowRoot).appendChild(template.content.cloneNode(true));
                 } else {
                     // console.log(this.appendChild);
                     this.appendChild(template.content.cloneNode(true));
+                }
+
+                if (super.connectedCallback) {
+                    super.connectedCallback();
                 }
             }
         };
